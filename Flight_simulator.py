@@ -14,6 +14,7 @@ yhteys = mysql.connector.connect(
     autocommit=True
 )
 
+# Done by Omar
 def get_location(name):
     sql = f"""  select country.name, airport.name 
                 from country 
@@ -27,7 +28,8 @@ def get_location(name):
     result = cursor.fetchone()
 
     return result
-    
+
+# Done by Omar    
 def change_location(destination, name):
     sql = f"""  update game 
                 join airport on game.location = airport.gps_code 
@@ -41,6 +43,7 @@ def change_location(destination, name):
 
     return (f"Player {name}'s location has been updated to {destination}")
 
+# Done by Omar
 def get_fuel(name):
     sql =   """ select co2_budget, co2_consumed
                 from game
@@ -52,6 +55,7 @@ def get_fuel(name):
 
     return result
 
+# Done by Omar
 def airport_distance(name, destination):
     current_location = get_location(name)
     airport1 = current_location[1]
@@ -87,6 +91,7 @@ def airport_distance(name, destination):
 
     return distance
 
+# Done by Omar
 def change_fuel(name, destination):
     distance = airport_distance(name, destination)
     print(destination)
@@ -104,6 +109,7 @@ def change_fuel(name, destination):
 
     return result
 
+# Done by Omar
 def airplane_shape():
     airplane_shape = r"""
        __|__
