@@ -122,8 +122,8 @@ while True:
     make_sure = input(f"Your consumed fuel is {fuel[1]}. Would you like to proceed? [y or n] ")
     if make_sure == "y":
         airplane_shape()
-        change_location(destination, name)
         change_fuel(name, destination)
+        change_location(destination, name)
     else:
         print("That's unfortunate.")
         break
