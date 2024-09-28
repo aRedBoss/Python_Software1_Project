@@ -1,5 +1,6 @@
 import mysql.connector
 from geopy.distance import geodesic
+from random import randint
 import time
 import os
 
@@ -14,6 +15,7 @@ yhteys = mysql.connector.connect(
     autocommit=True
 )
 
+# Done by Omar
 def player_exists(name):
     sql = "select count(screen_name) from game where screen_name = %s"
     cursor = yhteys.cursor()
@@ -23,6 +25,7 @@ def player_exists(name):
 
     return result[0] > 0
 
+# Done by Omar
 def get_count_of_players():
     sql = "select count(id) from game;"
     cursor = yhteys.cursor()
@@ -32,10 +35,11 @@ def get_count_of_players():
 
     return result[0]
 
+# Done by Omar
 def add_player(name):
 
     if player_exists(name):
-        print("Well come back!")
+        print("Wellcome back!")
     else:
         count = get_count_of_players()
         player_id = count + 1
@@ -46,6 +50,76 @@ def add_player(name):
         yhteys.commit()
         cursor.close()
     return
+
+# Done by Omar
+def get_points(name):
+    sql = "select points from game where screen_name = %s"
+    cursor = yhteys.cursor()
+    cursor.execute(sql, (name,))
+    result = cursor.fetchone()
+
+    return result[0]
+
+# Done by Omar
+def change_points(name):
+    sql = "update game set game.points = (game.points + 1) where screen_name = %s"
+    cursor = yhteys.cursor()
+    cursor.execute(sql, (name,))
+    yhteys.commit()
+    cursor.close()
+
+    return "You have won one point!"
+
+# Done by Omar
+def default_settings(name):
+    sql = "update game set game.points = 0, game.co2_consumed = 0, game.location = 'EFHK' where screen_name = %s" 
+    cursor = yhteys.cursor()
+    cursor.execute(sql, (name,))
+    yhteys.commit()
+    cursor.close()
+
+    return "Players values set to default"
+
+# Done by Omar
+def random_events():
+    random_event = randint(1, 3)
+    if random_event == 1:
+        print("\n⚠️  You’ve encountered a storm mid-flight! Make the right decision to pass safely.")
+        print("1. Fly above the storm.")
+        print("2. Fly directly through the storm.")
+        print("3. Attempt a dangerous emergency landing in the ocean.")
+        choice = int(input("Choose 1, 2 or 3: "))
+        if choice == 1:
+            print("✅ Correct! You successfully avoided the storm and continue your journey.")
+            return 1
+        elif choice in [2, 3]:
+            print("💥 Wrong choice! The plane crashed.")
+            return 2
+
+    elif random_event == 2:
+        print("\n🌪️  Alert: You are entering a turbulent zone! Choose your action carefully.")
+        print("1. Dive down to a lower altitude to escape the turbulence.")
+        print("2. Maintain your current altitude and ride it out.")
+        print("3. Ascend to a higher altitude to avoid the turbulence.")
+        choice = int(input("Choose 1, 2 or 3: "))
+        if choice == 3:
+            print("✅ Wise choice! You ascend and smoothly avoid the turbulence.")
+            return 1
+        elif choice in [1, 2]:
+            print("💥 Bad choice! The turbulence worsens, causing damage to the plane.")
+            return 2
+    else:
+        print("\n🔧  Alert: You’ve experienced a mechanical failure! Decide how to respond.")
+        print("1. Try to land the plane immediately")
+        print("2. Check the instruments to assess the damage.")
+        print("3. Call for emergency assistance while flying level.")
+        choice = int(input("Choose 1, 2 or 3: "))
+        if choice in [1, 3]:
+            print("💥 Bad choice! Without understanding the issue, your plane loses control.")
+            return 2
+        elif choice == 2:
+             print("✅ Good choice! You assess the situation and stabilize the flight.")
+             return 1
 
 # Done by Omar
 def get_location(name):
@@ -76,7 +150,7 @@ def change_location(destination, name):
     yhteys.commit()
     cursor.close()
 
-    return (f"Player {name}'s location has been updated to {destination}")
+    return # (f"Player {name}'s location has been updated to {destination}")
 
 # Done by Omar
 def get_fuel(name):
@@ -123,7 +197,7 @@ def airport_distance(name, destination):
     # Calculate the distance using geopy
     distance = geodesic(airport1_coords, airport2_coords).kilometers
 
-    print(f"Calculated distance from {airport1} to {airport2} is {distance:.2f} km.")
+    # print(f"Calculated distance from {airport1} to {airport2} is {distance:.2f} km.")
 
     return distance
 
@@ -141,7 +215,7 @@ def change_fuel(name, destination):
     cursor.close()
 
     result = f"Player {name} has consumed {int(fuel_consumed)} usnit of fuel"
-    print(result)
+    # print(result)
 
     return result
 
@@ -156,28 +230,40 @@ def airplane_shape():
     os.system('cls' if os.name == 'nt' else 'clear')
     print('\033[F\033[K', end='')
 
+name = input("Hey there! What's your name? ")
 while True:
-    name = input("What is your name? ")
     add_player(name)
     current_location = get_location(name)
+    points = get_points(name)
     fuel = get_fuel(name)
-    destination = input(f"You are at {current_location[1]} airport. Your fuel budget is {fuel[0]}. Where would you like to travel? ")
-    make_sure = input(f"Your consumed fuel is {fuel[1]}. Would you like to proceed? [y or n] ")
+    destination = input(f"You're currently at {current_location[1]} with a fuel budget of {fuel[0]}. Where would you like to fly next? ")
+    make_sure = input(f"Fuel usage: {fuel[1]} units. Do you want to keep going? (y/n): ")
     if make_sure == "y":
         airplane_shape()
-        change_fuel(name, destination)
-        change_location(destination, name)
+        events = random_events()
+        if events == 1:
+            change_points(name)
+            change_fuel(name, destination)
+            change_location(destination, name)
+        else:
+            default_settings(name)
+            break
     else:
-        print("That's unfortunate.")
+        print("No worries! Until next time!")
+        default_settings(name)
         break
+    points = get_points(name)
     current_location = get_location(name)
     fuel = get_fuel(name)
-    print (f"You have arrived to {current_location[1]}")
-    travle_again = input(f"Your consumed fuel is {fuel[1]}. Would you like to travle again? [y or n] ")
+    print (f"Welcome! You've just arrived at {current_location[1]}!")
+    print (f"Congratulations! You've earned a point. Your total points are now {points}.")
+    travle_again = input(f"Your fuel consumption is at {fuel[1]} units. Do you want to embark on another journey? (y/n): ")
     if travle_again == "y":
-        print("That's fun")
+        print("Awesome! Let's continue the adventure!")
         continue
     else:
+        print("No worries! Until next time!")
+        default_settings(name)
         break
 
 # print (change_fuel("Heini"))
