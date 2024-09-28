@@ -14,6 +14,39 @@ yhteys = mysql.connector.connect(
     autocommit=True
 )
 
+def player_exists(name):
+    sql = "select count(screen_name) from game where screen_name = %s"
+    cursor = yhteys.cursor()
+    cursor.execute(sql, (name,))
+    result = cursor.fetchone()
+    cursor.close()
+
+    return result[0] > 0
+
+def get_count_of_players():
+    sql = "select count(id) from game;"
+    cursor = yhteys.cursor()
+    cursor.execute(sql)
+    result = cursor.fetchone()
+    cursor.close()
+
+    return result[0]
+
+def add_player(name):
+
+    if player_exists(name):
+        print("Well come back!")
+    else:
+        count = get_count_of_players()
+        player_id = count + 1
+        sql = "insert into game (id, co2_consumed, co2_budget, location, screen_name, points) values (%s, %s, %s, %s, %s, %s)"
+        values = [player_id, 0, 10000, 'EFHK', name, 500]
+        cursor = yhteys.cursor()
+        cursor.execute(sql, values)
+        yhteys.commit()
+        cursor.close()
+    return
+
 # Done by Omar
 def get_location(name):
     sql = f"""  select country.name, airport.name 
@@ -26,6 +59,7 @@ def get_location(name):
     cursor = yhteys.cursor()
     cursor.execute(sql, (name,))
     result = cursor.fetchone()
+    cursor.close()
 
     return result
 
@@ -40,6 +74,7 @@ def change_location(destination, name):
     cursor = yhteys.cursor()
     cursor.execute(sql, (destination, name))
     yhteys.commit()
+    cursor.close()
 
     return (f"Player {name}'s location has been updated to {destination}")
 
@@ -52,6 +87,7 @@ def get_fuel(name):
     cursor = yhteys.cursor()
     cursor.execute(sql, (name,))
     result = cursor.fetchone()
+    cursor.close()
 
     return result
 
@@ -94,7 +130,6 @@ def airport_distance(name, destination):
 # Done by Omar
 def change_fuel(name, destination):
     distance = airport_distance(name, destination)
-    print(destination)
     fuel_consumed = (distance / 100) * 10
     sql =   f"""update game
                 set co2_consumed = co2_consumed + %s
@@ -103,6 +138,7 @@ def change_fuel(name, destination):
     cursor = yhteys.cursor()
     cursor.execute(sql, (fuel_consumed, name))
     yhteys.commit()
+    cursor.close()
 
     result = f"Player {name} has consumed {int(fuel_consumed)} usnit of fuel"
     print(result)
@@ -122,6 +158,7 @@ def airplane_shape():
 
 while True:
     name = input("What is your name? ")
+    add_player(name)
     current_location = get_location(name)
     fuel = get_fuel(name)
     destination = input(f"You are at {current_location[1]} airport. Your fuel budget is {fuel[0]}. Where would you like to travel? ")
