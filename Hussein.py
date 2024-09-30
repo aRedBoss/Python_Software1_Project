@@ -75,7 +75,7 @@ def default_settings(name):
     return "Players values set to default"
 
 # New: Define questions for Level 1
-#Doen BY omar
+# Done BY Omar
 level_1_questions = [
     {
         "question": "⚠️ You’ve encountered a storm mid-flight! Make the right decision to pass safely.",
@@ -95,7 +95,7 @@ level_1_questions = [
 ]
 
 # New: Define questions for Level 2
-#Done By Hussein----------------------------------------------------------------------------------------------------------Done By Hussein--
+# Done BY Hussein ----------------------------------------------------------------------------------------------Done By Hussein
 level_2_questions = [
     {
         "question": "🛩️ You're flying over a mountainous region. Suddenly, you spot a potential obstacle ahead!",
@@ -115,7 +115,7 @@ level_2_questions = [
 ]
 
 # New: Define questions for Level 3
-#Done By Hussein----------------------------------------------------------------------------------------------------------Done By Hussein--
+# Done BY Hussein ----------------------------------------------------------------------------------------------Done By Hussein
 level_3_questions = [
     {
         "question": "🚀 You're approaching a spaceport for landing. Choose your approach strategy!",
@@ -135,7 +135,7 @@ level_3_questions = [
 ]
 
 # New: Define questions for Level 4
-#Done By Hussein----------------------------------------------------------------------------------------------------------Done By Hussein--
+# Done BY Hussein ----------------------------------------------------------------------------------------------Done By Hussein
 level_4_questions = [
     {
         "question": "🏁 You're on the final approach to a busy airport. Choose your landing gear strategy!",
@@ -227,151 +227,151 @@ def airport_distance(name, destination):
 def change_fuel(name, destination):
     distance = airport_distance(name, destination)
     fuel_consumed = (distance / 100) * 10
-    sql =   f"""update game
-                set co2_consumed = (co2_consumed + %s)
-                where screen_name = %s"""
+    sql =   f"""  update game
+                set co2_budget = (co2_budget - {fuel_consumed}),
+                co2_consumed = (co2_consumed + {fuel_consumed})
+                where screen_name = %s;"""
+    
     cursor = yhteys.cursor()
-    cursor.execute(sql, (fuel_consumed, name))
+    cursor.execute(sql, (name,))
     yhteys.commit()
     cursor.close()
+    return 
 
-    result = f"Player {name} has consumed {int(fuel_consumed)} units of fuel"
-    return result
-
+# Main Game Loop
 # Done by Omar
-def airplane_shape():
-    airplane_shape = r"""
-       __|__
---o--o--´O`--o--o--
-        """
-    print(airplane_shape)
-    time.sleep(2)
-    os.system('cls' if os.name == 'nt' else 'clear')
-    print('\033[F\033[K', end='')
-
-name = input("Hey there! What's your name? ")
 while True:
-    add_player(name)
-    current_location = get_location(name)
-    points = get_points(name)
-    fuel = get_fuel(name)
-    destination = input(f"You're currently at {current_location[1]} with a fuel budget of {fuel[0]}. Where would you like to fly next? ")
-    make_sure = input(f"Fuel usage: {fuel[1]} units. Do you want to keep going? (Y/N): ")
-    
-    if make_sure.upper() == "Y":
-        airplane_shape()
+# Done BY Hussein ----------------------------------------------------------------------------------------------Done By Hussein
+    print('Welcome to the Pilot game')
+    print("The basis of the game is based on the assumption that you are a pilot and you face some difficulties during your journey")
+    print("The Game starts...")
+# Done by Omar
+    name = input("Hello Commander what is your name? ")
+    while True:
+        add_player(name)
+        current_location = get_location(name)
+        points = get_points(name)
+        fuel = get_fuel(name)
+        destination = input(f"You're currently at {current_location[1]} with a fuel budget of {fuel[0]}. Where would you like to fly next? ")
+        make_sure = input(f"Fuel usage: {fuel[1]} units. Do you want to keep going? (Y/N): ")
+        
+        if make_sure.upper() == "Y":
+            # airplane_shape()  # Assuming you have a function for airplane shape, it is commented out
 
-        # Level 1
-        correct_answers_level_1 = 0
-        questions_level_1 = sample(level_1_questions, 3)
-        for q in questions_level_1:
-            print(q["question"])
-            for option in q["options"]:
-                print(option)
-            choice = int(input("Choose 1, 2 or 3: "))
-            if choice == q["correct"]:
-                print("✅ Correct choice!")
-                correct_answers_level_1 += 1
-                change_points(name)
-            else:
-                print("💥 Wrong choice! Here's the correct answer:")
-                print(f"Correct Answer: {q['options'][q['correct'] - 1]}")  # Display correct option
-                break
-        else:  # This else corresponds to the for loop, it runs if the loop was not broken
-            if correct_answers_level_1 < 2:
-                print("You need to answer at least 2 questions correctly to proceed to Level 2.")
-                default_settings(name)
-                continue  # Restart the loop
-#Done By Hussein----------------------------------------------------------------------------------------------------------Done By Hussein--
-            # Level 2
-            correct_answers_level_2 = 0
-            questions_level_2 = sample(level_2_questions, 3)
-            for q in questions_level_2:
+            total_correct_answers = 0  # Initialize total correct answers for summary
+# Done by Omar
+            # Level 1
+            correct_answers_level_1 = 0
+            questions_level_1 = sample(level_1_questions, 3)
+            for q in questions_level_1:
                 print(q["question"])
                 for option in q["options"]:
                     print(option)
                 choice = int(input("Choose 1, 2 or 3: "))
                 if choice == q["correct"]:
                     print("✅ Correct choice!")
-                    correct_answers_level_2 += 1
+                    correct_answers_level_1 += 1
                     change_points(name)
                 else:
-                    print("💥 Wrong choice! Here's the correct answer:")
+                    print("❌ Wrong choice! Here's the correct answer:")
                     print(f"Correct Answer: {q['options'][q['correct'] - 1]}")  # Display correct option
-                    break
-            else:  # This else corresponds to the for loop, it runs if the loop was not broken
-                if correct_answers_level_2 < 2:
-                    print("You need to answer at least 2 questions correctly to proceed to Level 3.")
+                    break  # Exit loop on wrong answer
+            else:  # This else corresponds to the for loop
+                total_correct_answers += correct_answers_level_1  # Add to total if loop was not broken
+                if correct_answers_level_1 < 2:
+                    print("You need to answer at least 2 questions correctly to proceed to Level 2.")
                     default_settings(name)
                     continue  # Restart the loop
-#Done By Hussein----------------------------------------------------------------------------------------------------------Done By Hussein--
-                # Level 3
-                correct_answers_level_3 = 0
-                questions_level_3 = sample(level_3_questions, 3)
-                for q in questions_level_3:
+# Done BY Hussein ----------------------------------------------------------------------------------------------Done By Hussein
+                # Level 2
+                correct_answers_level_2 = 0
+                questions_level_2 = sample(level_2_questions, 3)
+                for q in questions_level_2:
                     print(q["question"])
                     for option in q["options"]:
                         print(option)
                     choice = int(input("Choose 1, 2 or 3: "))
                     if choice == q["correct"]:
                         print("✅ Correct choice!")
-                        correct_answers_level_3 += 1
+                        correct_answers_level_2 += 1
                         change_points(name)
                     else:
-                        print("💥 Wrong choice! Here's the correct answer:")
+                        print("❌ Wrong choice! Here's the correct answer:")
                         print(f"Correct Answer: {q['options'][q['correct'] - 1]}")  # Display correct option
                         break
-                else:  # This else corresponds to the for loop, it runs if the loop was not broken
-                    if correct_answers_level_3 < 2:
-                        print("You need to answer at least 2 questions correctly to proceed to Level 4.")
+                else:  # This else corresponds to the for loop
+                    total_correct_answers += correct_answers_level_2  # Add to total if loop was not broken
+                    if correct_answers_level_2 < 2:
+                        print("You need to answer at least 2 questions correctly to proceed to Level 3.")
                         default_settings(name)
                         continue  # Restart the loop
-#Done By Hussein----------------------------------------------------------------------------------------------------------Done By Hussein--
-                    # Level 4
-                    correct_answers_level_4 = 0
-                    questions_level_4 = sample(level_4_questions, 3)
-                    for q in questions_level_4:
+# Done BY Hussein ----------------------------------------------------------------------------------------------Done By Hussein
+                    # Level 3
+                    correct_answers_level_3 = 0
+                    questions_level_3 = sample(level_3_questions, 3)
+                    for q in questions_level_3:
                         print(q["question"])
                         for option in q["options"]:
                             print(option)
                         choice = int(input("Choose 1, 2 or 3: "))
                         if choice == q["correct"]:
                             print("✅ Correct choice!")
-                            correct_answers_level_4 += 1
+                            correct_answers_level_3 += 1
                             change_points(name)
                         else:
-                            print("💥 Wrong choice! Here's the correct answer:")
+                            print("❌ Wrong choice! Here's the correct answer:")
                             print(f"Correct Answer: {q['options'][q['correct'] - 1]}")  # Display correct option
                             break
-                    else:  # This else corresponds to the for loop, it runs if the loop was not broken
-                        change_fuel(name, destination)
-                        change_location(destination, name)
-#Done By Hussein----------------------------------------------------------------------------------------------------------Done By Hussein--
-        # Summary of performance
-        total_correct_answers = (correct_answers_level_1 + correct_answers_level_2 + correct_answers_level_3 + correct_answers_level_4)
-        total_questions = 12  # Total questions across all levels
-        success_rate = (total_correct_answers / total_questions) * 100
-#------------------------------------------------------------------------------------------------------------------------------------------
-
-#Done By omar
-        points = get_points(name)
-        current_location = get_location(name)
-        fuel = get_fuel(name)
-        print(f"Welcome! You've just arrived at {current_location[1]}!")
-        print(f"Congratulations! You've earned a point. Your total points are now {points}.")
-        print(f"Summary for {name}:")
-        print(f"Total Correct Answers: {total_correct_answers}/{total_questions}")
-        print(f"Success Rate: {success_rate:.2f}%")
-#Done By Hussein----------------------------------------------------------------------------------------------------------Done By Hussein--
-        # Ask to play again
-        play_again = input("Do you want to play again? (Y/N): ")
-        if play_again.upper() != "Y":
+                    else:  # This else corresponds to the for loop
+                        total_correct_answers += correct_answers_level_3  # Add to total if loop was not broken
+                        if correct_answers_level_3 < 2:
+                            print("You need to answer at least 2 questions correctly to proceed to Level 4.")
+                            default_settings(name)
+                            continue  # Restart the loop
+# Done BY Hussein ----------------------------------------------------------------------------------------------Done By Hussein
+                        # Level 4
+                        correct_answers_level_4 = 0
+                        questions_level_4 = sample(level_4_questions, 3)
+                        for q in questions_level_4:
+                            print(q["question"])
+                            for option in q["options"]:
+                                print(option)
+                            choice = int(input("Choose 1, 2 or 3: "))
+                            if choice == q["correct"]:
+                                print("✅ Correct choice!")
+                                correct_answers_level_4 += 1
+                                change_points(name)
+                            else:
+                                print("❌Wrong choice! Here's the correct answer:")
+                                print(f"Correct Answer: {q['options'][q['correct'] - 1]}")  # Display correct option
+                                break
+                        else:  # This else corresponds to the for loop
+                            total_correct_answers += correct_answers_level_4  # Add to total if loop was not broken
+                            change_fuel(name, destination)
+                            change_location(destination, name)
+# Done BY Hussein ----------------------------------------------------------------------------------------------Done By Hussein
+            # Summary of performance
+            total_questions = 12  # Total questions across all levels
+            if total_correct_answers > 0:  # Display summary if at least one question was answered correctly
+                success_rate = (total_correct_answers / total_questions) * 100
+                points = get_points(name)
+                current_location = get_location(name)
+                fuel = get_fuel(name)
+                print(f"Welcome! You've just arrived at {current_location[1]}!")
+                print(f"Congratulations! You've earned a point. Your total points are now {points}.")
+                print(f"Summary for {name}:")
+                print(f"Total Correct Answers: {total_correct_answers}/{total_questions}")
+                print(f"Success Rate: {success_rate:.2f}%")
+            else:
+                print("You did not answer any questions correctly. Please try again!")
+# Done by Omar
+            # Ask to play again
+            play_again = input("Do you want to play again? (Y/N): ")
+            if play_again.upper() != "N":
+                print("Welcome Again")
+                default_settings(name)
+            break  # Exit the main game loop
+        else:
             print("No worries! Until next time!")
             default_settings(name)
-            break
-#Done By omar       
-    else:
-        print("No worries! Until next time!")
-        default_settings(name)
-        break
-
+        break  # Exit the main game loop
