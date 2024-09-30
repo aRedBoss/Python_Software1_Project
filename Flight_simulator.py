@@ -237,8 +237,8 @@ while True:
     points = get_points(name)
     fuel = get_fuel(name)
     destination = input(f"You're currently at {current_location[1]} with a fuel budget of {fuel[0]}. Where would you like to fly next? ")
-    make_sure = input(f"Fuel usage: {fuel[1]} units. Do you want to keep going? (y/n): ")
-    if make_sure == "y":
+    make_sure = input(f"Fuel usage: {fuel[1]} units. Do you want to keep going? (Y/N): ")
+    if make_sure.upper() == "Y":
         airplane_shape()
         events = random_events()
         if events == 1:
@@ -257,8 +257,8 @@ while True:
     fuel = get_fuel(name)
     print (f"Welcome! You've just arrived at {current_location[1]}!")
     print (f"Congratulations! You've earned a point. Your total points are now {points}.")
-    travle_again = input(f"Your fuel consumption is at {fuel[1]} units. Do you want to embark on another journey? (y/n): ")
-    if travle_again == "y":
+    travle_again = input(f"Your fuel consumption is at {fuel[1]} units. Do you want to embark on another journey? (Y/N): ")
+    if travle_again.upper() == "Y":
         print("Awesome! Let's continue the adventure!")
         continue
     else:
