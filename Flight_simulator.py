@@ -61,7 +61,7 @@ def get_points(name):
     return result[0]
 
 # Done by Omar
-def change_points(name):
+def change_point_win(name):
     sql = "update game set game.points = (game.points + 1) where screen_name = %s"
     cursor = yhteys.cursor()
     cursor.execute(sql, (name,))
@@ -69,6 +69,16 @@ def change_points(name):
     cursor.close()
 
     return "You have won one point!"
+
+# Done by Omar
+def change_point_lost(name):
+    sql = "update game set game.points = (game.points - 1) where screen_name = %s"
+    cursor = yhteys.cursor()
+    cursor.execute(sql, (name,))
+    yhteys.commit()
+    cursor.close()
+
+    return "You have lost one point!"
 
 # Done by Omar
 def default_settings(name):
@@ -242,7 +252,7 @@ while True:
         airplane_shape()
         events = random_events()
         if events == 1:
-            change_points(name)
+            change_point_win(name)
             change_fuel(name, destination)
             change_location(destination, name)
         else:
