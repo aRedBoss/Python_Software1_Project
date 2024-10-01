@@ -77,4 +77,5 @@ while True:
             print("You have lost!")
             break
     print("Congratulations you won the game!")
+    function.default_settings(name)
     break
