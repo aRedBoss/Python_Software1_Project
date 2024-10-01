@@ -47,7 +47,7 @@ def add_player(name):
         count = get_count_of_players()
         player_id = count + 1
         sql = "insert into game (id, co2_consumed, co2_budget, location, screen_name, points) values (%s, %s, %s, %s, %s, %s)"
-        values = [player_id, 0, 10000, 'EFHK', name, 500]
+        values = [player_id, 0, 10000, 'EFHK', name, 0]
         cursor = yhteys.cursor()
         cursor.execute(sql, values)
         yhteys.commit()
@@ -219,7 +219,7 @@ def random_events(level):
 
 
 def get_location(name):
-    sql = f"""  select country.name, airport.name 
+    sql = """  select country.name, airport.name 
                 from country 
                 inner join airport 
                 on country.iso_country = airport.iso_country 
@@ -233,12 +233,24 @@ def get_location(name):
 
     return result
 
+def get_airport_list(country_code):
+    sql ="""select airport.id, airport.name from airport
+            inner join country 
+            on country.iso_country = airport.iso_country
+            where country.iso_country = %s and airport.type = "large_airport";"""
+    cursor = yhteys.cursor()
+    cursor.execute(sql, (country_code,))
+    result = cursor.fetchall()
+    cursor.close()
+
+    return result
+
   
 def change_location(destination, name):
-    sql = f"""  update game 
+    sql = """  update game 
                 join airport on game.location = airport.gps_code 
                 join country on country.iso_country = airport.iso_country
-                set game.location = (select airport.gps_code from airport where name = %s)
+                set game.location = (select airport.gps_code from airport where id = %s)
                 where game.screen_name = %s;"""
     
     cursor = yhteys.cursor()
@@ -313,7 +325,7 @@ def airport_distance(name, destination):
 
     cursor = yhteys.cursor()
 
-    sql1 = f"SELECT latitude_deg, longitude_deg FROM airport WHERE name = %s"
+    sql1 = "SELECT latitude_deg, longitude_deg FROM airport WHERE name = %s"
     cursor.execute(sql1, (airport1,))
     result1 = cursor.fetchone()
     if result1 is None:
@@ -321,7 +333,7 @@ def airport_distance(name, destination):
         return f"Airport {airport1} not found."
 
 
-    sql2 = f"SELECT latitude_deg, longitude_deg FROM airport WHERE name = %s"
+    sql2 = "SELECT latitude_deg, longitude_deg FROM airport WHERE id = %s"
     cursor.execute(sql2, (airport2,))
     result2 = cursor.fetchone()
     if result2 is None:
@@ -344,7 +356,7 @@ def airport_distance(name, destination):
 def change_fuel(name, destination):
     distance = airport_distance(name, destination)
     fuel_consumed = (distance / 100) * 10
-    sql =   f"""update game
+    sql =   """update game
                 set co2_consumed = co2_consumed + %s
                 where screen_name = %s;
             """

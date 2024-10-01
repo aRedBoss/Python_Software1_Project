@@ -8,7 +8,11 @@ while True:
     points = function.get_points(name)
     fuel = function.get_fuel(name)
     print("Level 1")
-    destination = input(f"You're currently at {current_location[1]}. Where would you like to fly next? ")
+    country_code = input(f"You're currently at {current_location[1]}. Which country would you like to explore next? Enter the country code (e.g., US, FI): ")
+    airports = function.get_airport_list(country_code)
+    for airport in airports:
+        print (f"{airport[0]}: {airport[1]}")
+    destination = input("Ready for takeoff? Enter the airport ID of your destination: ")
     function.airplane_shape()
     events = function.random_events(1)
     if events == 1:
@@ -24,12 +28,15 @@ while True:
         else:
             print("You have lost!")
             break
-    print("You have passed level 1!")
     fuel = function.get_fuel(name)
     points = function.get_points(name)
     current_location = function.get_location(name)
     print("Level 2")
-    destination = input(f"You're currently at {current_location[1]}. Where would you like to fly next? ")
+    country_code = input(f"You're currently at {current_location[1]}. Which country would you like to explore next? Enter the country code (e.g., US, FI): ")
+    airports = function.get_airport_list(country_code)
+    for airport in airports:
+        print (f"{airport[0]}: {airport[1]}")
+    destination = input("Ready for takeoff? Enter the airport ID of your destination: ")
     function.airplane_shape()
     events = function.random_events(2)
     if events == 1:
@@ -48,8 +55,12 @@ while True:
     fuel = function.get_fuel(name)
     points = function.get_points(name)
     current_location = function.get_location(name)
-    print("You have passed level 2!")
-    destination = input(f"You're currently at {current_location[1]}. Where would you like to fly next? ")
+    print("Level 2")
+    country_code = input(f"You're currently at {current_location[1]}. Which country would you like to explore next? Enter the country code (e.g., US, FI): ")
+    airports = function.get_airport_list(country_code)
+    for airport in airports:
+        print (f"{airport[0]}: {airport[1]}")
+    destination = input("Ready for takeoff? Enter the airport ID of your destination: ")
     function.airplane_shape()
     events = function.random_events(3)
     if events == 1:
@@ -67,9 +78,3 @@ while True:
             break
     print("Congratulations you won the game!")
     break
-
-# print (change_fuel("Heini"))
-# print (airport_distance("Helsinki Vantaa Airport"))
-# print (get_fuel("Heini"))
-# print (get_location("Heini"))
-# print (change_location("London Gatwick Airport", "Heini"))
