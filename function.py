@@ -441,11 +441,15 @@ def get_fuel(name):
 
 # Function to randomly ask the user to press arrow keys in a fast sequence
 def press_arrow_keys_fast(num: float):
-    if os.geteuid() != 0:
-        print("Error: You must be root to use the keyboard library on Linux.")
-        return 2  # Indicate failure due to lack of permissions
+    try:
+        if os.geteuid() != 0:
+            print("Error: You must be root to use the keyboard library on Linux.")
+            return 2  # Indicate failure due to lack of permissions
 
-    arrow_keys = ['up', 'down', 'left', 'right']
+        arrow_keys = ['up', 'down', 'left', 'right']
+    except AttributeError:
+        print("Error: Unable to check user privileges. This feature may not work as expected.")
+        return 2
     
     # Generate a random sequence of 5 arrow keys
     sequence = random.choices(arrow_keys, k=5)
