@@ -3,7 +3,7 @@ import function
 import time
 
 name = input("Enter your name: ")
-function.default_settings(name)
+function.add_player(name)
 
 while True:
 

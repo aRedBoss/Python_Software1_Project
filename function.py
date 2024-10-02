@@ -395,7 +395,7 @@ def get_location(name):
     result = cursor.fetchone()
     cursor.close()
 
-    return result
+    return result if result else ("Unknown", "Unknown")
 
 def get_airport_list(country_code):
     sql ="""select airport.id, airport.name from airport
