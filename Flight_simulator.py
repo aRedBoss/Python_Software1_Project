@@ -7,10 +7,14 @@ function.default_settings(name)
 
 while True:
 
-    level_function.level_one(name)
-    level_function.level_two(name)
-    points = function.get_points(name)
-    print(f"You have {points} points")
-    print("You win!")
-    time.sleep(3)
-    break 
+    try:
+        level_function.level_one(name)
+        level_function.level_two(name)
+        points = function.get_points(name)
+        print(f"You have {points} points")
+        print("You win!")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+    finally:
+        time.sleep(3)
+        break 
