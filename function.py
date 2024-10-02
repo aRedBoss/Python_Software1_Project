@@ -5,6 +5,7 @@ import random
 import time
 import os
 import keyboard
+import sys
 
 yhteys = mysql.connector.connect(
     host='172.17.0.2',
@@ -440,6 +441,10 @@ def get_fuel(name):
 
 # Function to randomly ask the user to press arrow keys in a fast sequence
 def press_arrow_keys_fast(num: float):
+    if os.geteuid() != 0:
+        print("Error: You must be root to use the keyboard library on Linux.")
+        return 2  # Indicate failure due to lack of permissions
+
     arrow_keys = ['up', 'down', 'left', 'right']
     
     # Generate a random sequence of 5 arrow keys
