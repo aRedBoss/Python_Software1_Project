@@ -93,129 +93,293 @@ def default_settings(name):
 
     return "Players values set to default"
 
-
 def random_events(level):
     if level == 1:
-        random_event = randint(1, 3)
-        if random_event == 1:
-            print("\n⚠️  You’ve encountered a storm mid-flight! Make the right decision to pass safely.")
-            print("1. Fly safly above the storm.")
-            print("2. Fly directly through the storm.")
-            print("3. Attempt a dangerous emergency landing in the ocean.")
-            choice = int(input("Choose 1, 2 or 3: "))
-            if choice == 1:
-                print("✅ Correct! You successfully avoided the storm and continue your journey.")
-                return 1
-            elif choice in [2, 3]:
-                print("💥 Wrong choice! The plane crashed.")
-                return 2
 
-        elif random_event == 2:
-            print("\n🌪️  Alert: You are entering a turbulent zone! Choose your action carefully.")
-            print("1. Dive down to a lower altitude to escape the turbulence.")
-            print("2. Maintain your current altitude and ride it out.")
-            print("3. Ascend to a higher altitude to avoid the turbulence safly.")
-            choice = int(input("Choose 1, 2 or 3: "))
-            if choice == 3:
-                print("✅ Wise choice! You ascend and smoothly avoid the turbulence.")
-                return 1
-            elif choice in [1, 2]:
-                print("💥 Bad choice! The turbulence worsens, causing damage to the plane.")
-                return 2
-        else:
-            print("\n🔧  Alert: You’ve experienced a mechanical failure! Decide how to respond.")
-            print("1. Try to land the plane immediately")
-            print("2. Check the instruments to assess the damage and fix it.")
-            print("3. Call for emergency assistance while flying level.")
-            choice = int(input("Choose 1, 2 or 3: "))
-            if choice in [1, 3]:
-                print("💥 Bad choice! Without understanding the issue, your plane loses control.")
-                return 2
-            elif choice == 2:
-                print("✅ Good choice! You assess the situation and stabilize the flight.")
-                return 1
-    elif level == 2:
-        random_event_level2 = random.randint(1, 3)
+        while True:  # Loop for level 1
+            random_event = random.randint(1, 3)
 
-        if random_event_level2 == 1:
-            print("\n🔥 Emergency: One of the engines has caught fire!")
-            print("1. Shut down the burning engine and divert to the nearest airport.")
-            print("2. Try to extinguish the fire mid-flight.")
-            print("3. Increase speed to blow out the fire.")
-            choice = int(input("Choose 1, 2 or 3: "))
-            if choice == 1:
-                print("✅ Smart move! You shut down the engine and land safely.")
-                return 1
-            elif choice in [2, 3]:
-                print("💥 Bad decision! The fire spreads, and the plane crashes.")
-                return 2
+            if random_event == 1:
+                print("\n⚠️  You’ve encountered a storm mid-flight! Make the right decision to pass safely.")
+                print("1. Fly safely above the storm.")
+                print("2. Fly directly through the storm.")
+                print("3. Attempt a dangerous emergency landing in the ocean.")
+                choice = int(input("Choose 1, 2 or 3: "))
+                if choice == 1:
+                    print("✅ Correct! You successfully avoided the storm and continue your journey.")
+                    return 1
+                else:
+                    print("💥 Wrong choice! The plane crashed.")
+                    return 2
+            elif random_event == 2:
+                print("\n🌪️  Alert: You are entering a turbulent zone! Choose your action carefully.")
+                print("1. Dive down to a lower altitude to escape the turbulence.")
+                print("2. Maintain your current altitude and ride it out.")
+                print("3. Ascend to a higher altitude to avoid the turbulence safely.")
+                choice = int(input("Choose 1, 2 or 3: "))
+                if choice == 3:
+                    print("✅ Wise choice! You ascend and smoothly avoid the turbulence.")
+                    return 1
+                else:
+                    print("💥 Bad choice! The turbulence worsens, causing damage to the plane.")
+                    return 2
 
-        elif random_event_level2 == 2:
-            print("\n🛩️  You’re running low on fuel in the middle of nowhere!")
-            print("1. Look for the nearest airport and attempt an emergency landing.")
-            print("2. Try to conserve fuel by reducing speed and altitude.")
-            print("3. Call air traffic control and request a fuel dump.")
-            choice = int(input("Choose 1, 2 or 3: "))
-            if choice == 2:
-                print("✅ Good call! You conserve fuel and make it to the nearest airport.")
-                return 1
-            elif choice in [1, 3]:
-                print("💥 Poor decision! You either run out of fuel or lose precious time.")
-                return 2
+            elif random_event == 3:
+                print("\n🔧  Alert: You’ve experienced a mechanical failure! Decide how to respond.")
+                print("1. Try to land the plane immediately.")
+                print("2. Check the instruments to assess the damage and fix it.")
+                print("3. Call for emergency assistance while flying level.")
+                choice = int(input("Choose 1, 2 or 3: "))
+                if choice == 2:
+                    print("✅ Good choice! You assess the situation and stabilize the flight.")
+                    return 1
+                else:
+                    print("💥 Bad choice! Without understanding the issue, your plane loses control.")
+                    return 2
 
-        elif random_event_level2 == 3:
-            print("\n❄️  The plane’s wings are icing over, reducing control!")
-            print("1. Descend to a warmer altitude to melt the ice.")
-            print("2. Engage anti-ice systems and continue as planned.")
-            print("3. Perform aggressive maneuvers to shake off the ice.")
-            choice = int(input("Choose 1, 2 or 3: "))
-            if choice == 2:
-                print("✅ Right choice! The anti-ice system works, and you regain control.")
-                return 1
-            elif choice in [1, 3]:
-                print("💥 Wrong choice! The ice buildup worsens, and you lose control of the plane.")
-                return 2
-    else:
-        random_event_level3 = random.randint(1, 3)
+    if level == 2:
+        while True:  # Loop for level 2
+            random_event = random.randint(1, 3)
 
-        if random_event_level3 == 1:
-            print("\n🛰️  Emergency: A satellite debris field is heading your way!")
-            print("1. Perform a steep dive to avoid the debris.")
-            print("2. Change your flight path slightly and fly through.")
-            print("3. Speed up to fly past the debris field before it reaches you.")
-            choice = int(input("Choose 1, 2 or 3: "))
-            if choice == 3:
-                print("✅ Good decision! You speed up and narrowly escape the debris.")
-                return 1
-            elif choice in [1, 2]:
-                print("💥 Bad move! The debris strikes the plane, causing a crash.")
-                return 2
+            if random_event == 1:
+                print("\n⚠️  Warning: A severe thunderstorm is ahead! Choose wisely.")
+                print("1. Alter your flight path to navigate around the storm.")
+                print("2. Fly into the storm to make up lost time.")
+                print("3. Perform an emergency landing on a nearby runway.")
+                choice = int(input("Choose 1, 2 or 3: "))
+                if choice == 1:
+                    print("✅ Correct! You successfully navigate around the storm.")
+                    return 1
+                else:
+                    print("💥 Wrong choice! The plane is severely damaged in the storm.")
+                    return 2
+            elif random_event == 2:
+                print("\n🌪️  Alert: Unforeseen turbulence is hitting your aircraft! What will you do?")
+                print("1. Steer into the turbulence to stabilize the flight.")
+                print("2. Pull up sharply to gain altitude quickly.")
+                print("3. Release altitude and allow the plane to bounce.")
+                choice = int(input("Choose 1, 2 or 3: "))
+                if choice == 2:
+                    print("✅ Good decision! You gain altitude and smooth out the flight.")
+                    return 1
+                else:
+                    print("💥 Wrong choice! The plane is severely damaged in the storm.")
+                    return 2
+            elif random_event == 3:
+                print("\n🔧  Critical failure alert! A system is malfunctioning! Choose your action.")
+                print("1. Ignore it and continue flying.")
+                print("2. Check your backup systems.")
+                print("3. Initiate emergency protocols immediately.")
+                choice = int(input("Choose 1, 2 or 3: "))
+                if choice == 2:
+                    print("✅ Correct! You check backup systems and regain control.")
+                    return 1
+                else:
+                    print("💥 Bad choice! The malfunction leads to a crash.")
+                    return 2
+    if level == 3:
+        while True:  # Loop for level 3
+            random_event = random.randint(1, 3)
+            print("The weather is rainy!")
 
-        elif random_event_level3 == 2:
-            print("\n⚡️ Critical: You are caught in a dangerous electrical storm!")
-            print("1. Descend immediately to avoid lightning.")
-            print("2. Fly straight through at full speed.")
-            print("3. Fly at a steady pace, hoping to ride it out.")
-            choice = int(input("Choose 1, 2 or 3: "))
-            if choice == 1:
-                print("✅ Smart move! Descending keeps you below the worst of the storm, and you avoid disaster.")
-                return 1
-            elif choice in [2, 3]:
-                print("💥 Bad decision! Lightning strikes the plane, causing severe damage.")
-                return 2
+            if random_event == 1:
+                print("\n⚠️  Caution: A volcanic ash cloud is reported in your vicinity! Act fast!")
+                print("1. Change course to avoid the ash cloud.")
+                print("2. Attempt to fly through the ash to reach clear skies.")
+                print("3. Reduce speed to conserve fuel.")
+                choice = int(input("Choose 1, 2 or 3: "))
+                if choice == 1:
+                    print("✅ Smart move! You steer clear of the ash cloud.")
+                    return 1
+                else:
+                    print("💥 Incorrect choice! The engines are damaged by the ash. Restarting level!")
+                    continue  # Restart the level if crash happens
+            elif random_event == 2:
+                print("\n🌪️  Warning: A crosswind is making landing tricky! Decide quickly.")
+                print("1. Increase speed to land safely despite the wind.")
+                print("2. Attempt a sideways landing.")
+                print("3. Circle around and land from the opposite direction.")
+                choice = int(input("Choose 1, 2 or 3: "))
+                if choice == 3:
+                    print("✅ Wise choice! You successfully land the plane.")
+                    return 1
+                else:
+                    print("💥 Bad choice! You lose control on landing. Restarting level!")
+                    continue  # Restart the level if crash happens
+            elif random_event == 3:
+                print("\n🔧  Alert: A critical gauge has malfunctioned! What will you do?")
+                print("1. Fly blindly without checking.")
+                print("2. Rely on your instincts to navigate.")
+                print("3. Use alternative methods to gauge altitude and speed.")
+                choice = int(input("Choose 1, 2 or 3: "))
+                if choice == 3:
+                    print("✅ Good call! You use alternative gauges and maintain control.")
+                    return 1
+                else:
+                    print("💥 Bad choice! You are flying dangerously without information. Restarting level!")
+                    continue  # Restart the level if crash happens
+    if level == 4:
+        while True:  # Loop for level 4
+            random_event = random.randint(1, 3)
+            print("The weather is windy!")
 
-        elif random_event_level3 == 3:
-            print("\n🛑  Alert: A fuel leak has been detected!")
-            print("1. Reduce speed immediately to conserve fuel.")
-            print("2. Perform a risky emergency landing.")
-            print("3. Jettison excess weight to lighten the plane and conserve fuel.")
-            choice = int(input("Choose 1, 2 or 3: "))
-            if choice == 3:
-                print("✅ Excellent choice! You reduce the weight and successfully conserve fuel.")
-                return 1
-            elif choice in [1, 2]:
-                print("💥 Wrong decision! The plane runs out of fuel before you reach safety.")
-                return 2
+            if random_event == 1:
+                print("\n⚠️  Alert: Severe icing is detected on the wings! Choose carefully.")
+                print("1. Climb to a higher altitude to escape the ice.")
+                print("2. Use de-icing equipment immediately.")
+                print("3. Attempt to glide to a nearby airport.")
+                choice = int(input("Choose 1, 2 or 3: "))
+                if choice == 2:
+                    print("✅ Correct! You successfully de-ice the wings and regain control.")
+                    return 1
+                else:
+                    print("💥 Bad choice! Climbing worsens the icing condition. Restarting level!")
+                    continue  # Restart the level if crash happens
+            elif random_event == 2:
+                print("\n🌪️  Danger: A flock of birds is approaching! What will you do?")
+                print("1. Attempt to climb above the birds.")
+                print("2. Steer away to avoid collision.")
+                print("3. Increase speed to pass through.")
+                choice = int(input("Choose 1, 2 or 3: "))
+                if choice == 2:
+                    print("✅ Wise choice! You avoid a dangerous collision.")
+                    return 1
+                else:
+                    print("💥 Bad choice! You hit the birds and suffer damage. Restarting level!")
+                    continue  # Restart the level if crash happens
+            elif random_event == 3:
+                print("\n🔧  Alert: Fuel reserves are critically low! What will you do?")
+                print("1. Search for the nearest airport for an emergency landing.")
+                print("2. Try to stretch the fuel by flying lower.")
+                print("3. Maintain altitude and conserve fuel.")
+                choice = int(input("Choose 1, 2 or 3: "))
+                if choice == 1:
+                    print("✅ Good choice! You locate an airport and land safely.")
+                    return 1
+                else:
+                    print("💥 Bad choice! The plane runs out of fuel. Restarting level!")
+                    continue  # Restart the level if crash happens
+    if level == 5:
+        while True:  # Loop for level 5
+            random_event = random.randint(1, 3)
+            print("The weather is stormy!")
+
+            if random_event == 1:
+                print("\n⚠️  Warning: A ground control communication failure has occurred! Choose wisely.")
+                print("1. Attempt to fix the communication systems.")
+                print("2. Try to land without guidance.")
+                print("3. Use backup systems for navigation.")
+                choice = int(input("Choose 1, 2 or 3: "))
+                if choice == 3:
+                    print("✅ Smart choice! You regain communication using backups.")
+                    return 1
+                else:
+                    print("💥 Bad choice! You lose valuable time and crash. Restarting level!")
+                    continue  # Restart the level if crash happens
+            elif random_event == 2:
+                print("\n🌪️  Alert: An unexpected wind shear is detected! What will you do?")
+                print("1. Pull up immediately to avoid descending.")
+                print("2. Maintain current speed and altitude.")
+                print("3. Dive down to regain control.")
+                choice = int(input("Choose 1, 2 or 3: "))
+                if choice == 1:
+                    print("✅ Wise move! You avoid losing altitude.")
+                    return 1
+                else:
+                    print("💥 Bad choice! You lose control of the aircraft. Restarting level!")
+                    continue  # Restart the level if crash happens
+            elif random_event == 3:
+                print("\n🔧  Critical: A cockpit warning light is flashing! Decide your course of action.")
+                print("1. Investigate the source of the warning.")
+                print("2. Ignore it; it's probably a malfunction.")
+                print("3. Call for assistance to analyze the situation.")
+                choice = int(input("Choose 1, 2 or 3: "))
+                if choice == 1:
+                    print("✅ Good choice! You identify and resolve the issue.")
+                    return 1
+                else:
+                    print("💥 Bad choice! Ignoring it leads to a crash. Restarting level!")
+                    continue  # Restart the level if crash happens
+    if level == 6:
+        while True:  # Loop for level 6
+            random_event = random.randint(1, 3)
+
+            if random_event == 1:
+                print("\n⚠️  Alert: A nearby plane is flying erratically! What will you do?")
+                print("1. Maintain your course and speed.")
+                print("2. Change altitude to avoid the plane.")
+                print("3. Attempt to communicate with the other pilot.")
+                choice = int(input("Choose 1, 2 or 3: "))
+                if choice == 2:
+                    print("✅ Wise choice! You safely avoid a collision.")
+                    return 1
+                else:
+                    print("💥 Bad choice! Communication failure results in danger. Restarting level!")
+                    continue  # Restart the level if crash happens
+            elif random_event == 2:
+                print("\n🌪️  Warning: An unexpected storm cell is forming nearby! Choose your action.")
+                print("1. Turn around to avoid the storm entirely.")
+                print("2. Use radar to navigate through it.")
+                print("3. Dive below to lower altitudes to escape.")
+                choice = int(input("Choose 1, 2 or 3: "))
+                if choice == 1:
+                    print("✅ Correct! You avoid the storm entirely.")
+                    return 1
+                else:
+                    print("💥 Bad choice! You end up in the worst part of the storm. Restarting level!")
+                    continue  # Restart the level if crash happens
+            elif random_event == 3:
+                print("\n🔧  Alert: A fire is detected in the engine! Decide your action.")
+                print("1. Shut down the engine immediately.")
+                print("2. Land at the nearest airport.")
+                print("3. Use fire suppression systems to contain the fire.")
+                choice = int(input("Choose 1, 2 or 3: "))
+                if choice == 3:
+                    print("✅ Smart choice! You contain the fire and maintain control.")
+                    return 1
+                else:
+                    print("💥 Bad choice! The plane loses power. Restarting level!")
+                    continue  # Restart the level if crash happens
+    if level == 7:
+        while True:  # Loop for level 7
+            random_event = random.randint(1, 3)
+
+            if random_event == 1:
+                print("\n⚠️  Alert: A critical system failure has occurred mid-flight! Choose wisely.")
+                print("1. Attempt a manual override to regain control.")
+                print("2. Execute a controlled descent.")
+                print("3. Consult with your co-pilot for a strategy.")
+                choice = int(input("Choose 1, 2 or 3: "))
+                if choice == 3:
+                    print("✅ Good decision! You develop a plan with your co-pilot.")
+                    return 1
+                else:
+                    print("💥 Bad choice! A controlled descent fails. Restarting level!")
+                    continue  # Restart the level if crash happens
+            elif random_event == 2:
+                print("\n🌪️  Caution: An unexpected downdraft is threatening your flight! What will you do?")
+                print("1. Pull up sharply to counteract.")
+                print("2. Maintain steady speed and altitude.")
+                print("3. Lower your flaps for increased lift.")
+                choice = int(input("Choose 1, 2 or 3: "))
+                if choice == 1:
+                    print("✅ Smart choice! You counteract the downdraft effectively.")
+                    return 1
+                else:
+                    print("💥 Bad choice! Lowering flaps causes instability. Restarting level!")
+                    continue  # Restart the level if crash happens
+            elif random_event == 3:
+                print("\n🔧  Warning: Your navigation system has gone offline! Decide your next step.")
+                print("1. Attempt to fix the navigation system.")
+                print("2. Rely on visual navigation.")
+                print("3. Use emergency radio to contact ground control.")
+                choice = int(input("Choose 1, 2 or 3: "))
+                if choice == 3:
+                    print("✅ Correct! You establish contact and get directions.")
+                    return 1
+                else:
+                    print("💥 Bad choice! Time wasted leads to a crash. Restarting level!")
+                    continue  # Restart the level if crash happens
 
 
 def get_location(name):
@@ -275,14 +439,13 @@ def get_fuel(name):
 
 
 # Function to randomly ask the user to press arrow keys in a fast sequence
-def press_arrow_keys_fast(num):
+def press_arrow_keys_fast(num: float):
     arrow_keys = ['up', 'down', 'left', 'right']
     
     # Generate a random sequence of 5 arrow keys
     sequence = random.choices(arrow_keys, k=5)
     
     # Show the countdown before starting
-    print("Prepare for the emergency maneuver! You have 3 seconds to brace yourself...")
     for i in range(3, 0, -1):
         print(f"{i}...")
         time.sleep(1)
@@ -290,7 +453,6 @@ def press_arrow_keys_fast(num):
     print("Go!\n")
     
     # Show the sequence to the user one key at a time
-    print("Alert! The plane is losing altitude. Quickly press the following arrow keys in order to steer the plane to safety:")
     
     start_time = time.time()  # Start tracking time
 
@@ -303,8 +465,12 @@ def press_arrow_keys_fast(num):
                 print("✅ Correct!")
                 break
         else:
-            print("💥 Too slow! Moving to the next key.")
-            print(f"The correct key was: {key}")
+            os.system('cls' if os.name == 'nt' else 'clear')
+            print('\033[F\033[K', end='')
+            print("💥 Too slow! No point for you! Moving on.")
+            time.sleep(3)
+            os.system('cls' if os.name == 'nt' else 'clear')
+            print('\033[F\033[K', end='')
             return 2  # Player failed to press the key in time
     
     # End tracking time
@@ -312,10 +478,12 @@ def press_arrow_keys_fast(num):
     
     # Calculate total time taken
     total_time = end_time - start_time
-    
-    print(f"Great! You pressed all keys in {total_time:.2f} seconds.")
-    return 1  # Player successfully pressed all keys
 
+
+    os.system('cls' if os.name == 'nt' else 'clear')
+    print('\033[F\033[K', end='')
+    print(f"✅ Great! You pressed all keys in {total_time:.2f} seconds.")
+    return 1  # Player successfully pressed all keys
 
 def airport_distance(name, destination):
     current_location = get_location(name)
@@ -377,6 +545,7 @@ def airplane_shape():
 --o--o--´O`--o--o--
         """
     print (airplane_shape)
-    time.sleep(2)
+
+def clear_line():
     os.system('cls' if os.name == 'nt' else 'clear')
     print('\033[F\033[K', end='')
