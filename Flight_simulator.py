@@ -1,8 +1,13 @@
 import level_function
 import function
 import time
+import scoreboard
 
 name = input("Enter your name: ")
+show_scoreboard = input("Would you like to see the scoreboard? (y/n): ").strip().lower()
+if show_scoreboard == 'y':
+    scoreboard.display_scoreboard()
+
 function.add_player(name)
 
 while True:
