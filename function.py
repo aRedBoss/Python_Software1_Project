@@ -7,11 +7,11 @@ import os
 import keyboard
 
 yhteys = mysql.connector.connect(
-    host='localhost',
+    host='172.17.0.2',
     port=3306,
     database='flight_game',
-    user='omar',
-    password='Amoury123',
+    user='root',
+    password='mypass',
     charset='utf8mb4',
     collation='utf8mb4_general_ci',
     autocommit=True
