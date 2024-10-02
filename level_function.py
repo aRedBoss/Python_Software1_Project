@@ -9,6 +9,10 @@ def level_one(name):
     while True:
         current_location = function.get_location(name)
         print("Level 1")
+        if current_location is None:
+            print("Error: Unable to retrieve current location. Please check your player data.")
+            break
+
         country_code = input(f"You're currently at {current_location[1]}. Which country would you like to explore next? Enter the country code (e.g., US, FI): ")
         airports = function.get_airport_list(country_code)
         for airport in airports:
