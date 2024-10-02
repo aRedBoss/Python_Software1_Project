@@ -2,7 +2,7 @@ import level_function
 import function
 import time
 
-name = input("name ")
+name = input("Enter your name: ")
 function.default_settings(name)
 
 while True:
