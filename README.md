@@ -8,6 +8,7 @@ Welcome to the Flight Game! This is an interactive console-based game where play
 - [Requirements](#requirements)
 - [Game Phases](#game-phases)
 - [Game Rules](#game-rules)
+- [How to Play](#how-to-play)
 - [Functions Overview](#functions-overview)
 
 ## Features
@@ -17,6 +18,10 @@ Welcome to the Flight Game! This is an interactive console-based game where play
 - **Fuel Consumption Tracking**: Monitor your fuel budget and consumption based on travel distance.
 - **Distance Calculation**: Calculate the distance between airports using geographical coordinates.
 - **Interactive Gameplay**: Engage in a loop where you can travel multiple times until you decide to quit.
+- **Scoreboard**: View a scoreboard of all players and their points.
+- **Random Events**: Encounter random events during flights that can affect your journey.
+- **Level Progression**: Progress through multiple levels with increasing difficulty.
+- **Arrow Key Challenges**: Complete challenges by pressing arrow keys quickly to earn points.
 
 ## Requirements
 
@@ -58,7 +63,17 @@ Enter your desired destination airport. If your fuel budget allows, confirm to p
 The game will calculate the distance traveled and update your fuel consumption.
 You can choose to travel again or exit the game.
 
-## Functions Overview
+## How to Play
+
+1. **Start the Game**: Run the `Flight_simulator.py` script.
+2. **Enter Your Name**: Input your screen name to register or continue.
+3. **View Scoreboard**: Choose whether to view the scoreboard of all players.
+4. **Select Destination**: Choose your next destination by entering the country code and airport ID.
+5. **Manage Fuel**: Monitor your fuel consumption and ensure you have enough to reach your destination.
+6. **Complete Challenges**: Press arrow keys quickly when prompted to earn points.
+7. **Encounter Random Events**: Make decisions during random events to continue your journey.
+8. **Progress Through Levels**: Successfully complete levels to progress to more challenging ones.
+9. **Win the Game**: Accumulate points and complete all levels to win the game.
 
 - player_exists(name): Checks if a player already exists in the database.
 
