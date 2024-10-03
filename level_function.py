@@ -22,7 +22,7 @@ def level_one(name):
             print (f"{airport[0]}: {airport[1]}")
         while True:
             destination = input("Ready for takeoff? Enter the airport ID of your destination: ")
-            if function.check_airport_availability(destination) == False:
+            if function.check_airport_availability(destination, country_code) == False:
                 print("Try Again!")
                 continue
             break
@@ -68,7 +68,7 @@ def level_one(name):
                 print("+1 point")
                 time.sleep(3)
                 function.clear_line()
-                print("✅ Well done! Moving onto the next level.")
+            print("✅ Well done! Moving onto the next level.")
             function.change_location(destination, name)
             time.sleep(3)
             function.clear_line()
@@ -100,7 +100,7 @@ def level_two(name):
             print (f"{airport[0]}: {airport[1]}")
         while True:
             destination = input("Ready for takeoff? Enter the airport ID of your destination: ")
-            if function.check_airport_availability(destination) == False:
+            if function.check_airport_availability(destination, country_code) == False:
                 print("Try Again!")
                 continue
             break
@@ -146,8 +146,8 @@ def level_two(name):
                 print("+1 point")
                 time.sleep(3)
                 function.clear_line()
-                print("✅ Well done! Moving onto the next level.")
-            function.change_location(destination, name)
+            print("✅ Well done! Moving onto the next level.")
+            function.change_location(destination, name) 
             time.sleep(3)
             function.clear_line()
             break
@@ -174,7 +174,7 @@ def level_three(name):
             print (f"{airport[0]}: {airport[1]}")
         while True:
             destination = input("Ready for takeoff? Enter the airport ID of your destination: ")
-            if function.check_airport_availability(destination) == False:
+            if function.check_airport_availability(destination, country_code) == False: 
                 print("Try Again!")
                 continue
             break
@@ -220,7 +220,7 @@ def level_three(name):
                 print("+1 point")
                 time.sleep(3)
                 function.clear_line()
-                print("✅ Well done! Moving onto the next level.")
+            print("✅ Well done! Moving onto the next level.")
             function.change_location(destination, name)
             time.sleep(3)
             function.clear_line()
@@ -248,7 +248,7 @@ def level_four(name):
             print (f"{airport[0]}: {airport[1]}")
         while True:
             destination = input("Ready for takeoff? Enter the airport ID of your destination: ")
-            if function.check_airport_availability(destination) == False:
+            if function.check_airport_availability(destination, country_code) == False:
                 print("Try Again!")
                 continue
             break
@@ -289,12 +289,86 @@ def level_four(name):
     
             print("Landing time! The weather is windy. Landing will be a little more difficult than the last one. Grab your controls and get ready to land the plane!")
             time.sleep(4)
-            if function.press_arrow_keys_fast(2.0) == 1: 
+            if function.press_arrow_keys_fast(1.7) == 1: 
                 function.change_point_win(name)
                 print("+1 point")
                 time.sleep(3)
                 function.clear_line()
-                print("✅ Well done! Moving onto the next level.")
+            print("✅ Well done! Moving onto the next level.")
+            function.change_location(destination, name)
+            time.sleep(3)
+            function.clear_line()
+            break
+        else:
+            time.sleep(3)
+            function.clear_line()
+            print("Level failed. Restarting level!")
+            time.sleep(3)
+            function.clear_line()
+            points
+            continue
+
+def level_five(name):
+    points = function.get_points(name)
+    while True:
+        current_location = function.get_location(name)
+        print(f"Level 5, this is the last and hardest level!. You have {points} points")
+        country_code = input(f"You're currently at {current_location[1]}. Which country would you like to explore next? Enter the country code (e.g., US, FI): ")
+        airports = function.get_airport_list(country_code)
+        if len(airports) == 0:
+            print("Try again!")
+            continue
+        for airport in airports:
+            print (f"{airport[0]}: {airport[1]}")
+        while True:
+            destination = input("Ready for takeoff? Enter the airport ID of your destination: ")
+            if function.check_airport_availability(destination, country_code) == False:
+                print("Try Again!")
+                continue
+            break
+        time.sleep(1)
+        function.airplane_shape()
+        print("The weather is stormy! Take off will be a little more difficult than the last one.")
+        time.sleep(3)
+        function.clear_line()
+        print("Taking off! Grab your controls and get ready to take off!")
+        time.sleep(3)
+        if function.press_arrow_keys_fast(1.3) == 1: 
+            function.change_point_win(name)
+            print("+1 point")
+            time.sleep(4)
+            function.clear_line()
+        while True:
+            try:
+                events = function.random_events(1)
+            except ValueError:
+                print("Invalid input, try again!")
+                time.sleep(2)
+                function.clear_line()
+                continue
+            break
+        if events == 1:
+            function.change_point_win(name)
+            print("+1 point")
+            time.sleep(3)
+            function.clear_line()
+
+            print("Get ready to manevuer the plane during the troubles.")
+            time.sleep(3)
+            if function.press_arrow_keys_fast(1.3) == 1:
+                function.change_point_win(name)
+                print("+1 point")
+                time.sleep(3)
+                function.clear_line()
+    
+            print("Landing time! The weather is stormy. Landing will be a little more difficult than the last one. Grab your controls and get ready to land the plane!")
+            time.sleep(4)
+            if function.press_arrow_keys_fast(1.3) == 1: 
+                function.change_point_win(name)
+                print("+1 point")
+                time.sleep(3)
+                function.clear_line()
+            print("✅ Well done! You finished the game! Be proud of yourself!")
             function.change_location(destination, name)
             time.sleep(3)
             function.clear_line()

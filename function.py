@@ -514,10 +514,10 @@ def get_airport_list(country_code):
 
     return result
 
-def check_airport_availability(destination):
-    sql = """select airport.id from airport where airport.id = %s;"""
+def check_airport_availability(destination, country_code):
+    sql = """select airport.id from airport inner join country on airport.iso_country = country.iso_country where airport.id = %s and country.iso_country = %s;"""
     cursor = yhteys.cursor()
-    cursor.execute(sql, (destination,))
+    cursor.execute(sql, (destination, country_code))
     result = cursor.fetchall()
     cursor.close()
     if len(result) == 0:
