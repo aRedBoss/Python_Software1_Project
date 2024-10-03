@@ -1,5 +1,1 @@
-Under development!
 
-keyboard library cannot run as normal user in Linux.
-it must be removed or fixed whole feature related it. 
-I tested in VE. I may be the issue. 
