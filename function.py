@@ -5,14 +5,13 @@ import random
 import time
 import os
 import keyboard
-import sys
 
 yhteys = mysql.connector.connect(
-    host='172.17.0.2',
+    host='localhost',
     port=3306,
     database='flight_game',
-    user='root',
-    password='mypass',
+    user='omar',
+    password='Amoury123',
     charset='utf8mb4',
     collation='utf8mb4_general_ci',
     autocommit=True
@@ -109,6 +108,11 @@ def random_events(level):
                 if choice == 1:
                     print("✅ Correct! You successfully avoided the storm and continue your journey.")
                     return 1
+                elif choice > 3:
+                    print("Invalid input, try again!")
+                    time.sleep(2)
+                    clear_line()
+                    continue
                 else:
                     print("💥 Wrong choice! The plane crashed.")
                     return 2
@@ -121,6 +125,11 @@ def random_events(level):
                 if choice == 3:
                     print("✅ Wise choice! You ascend and smoothly avoid the turbulence.")
                     return 1
+                elif choice > 3:
+                    print("Invalid input, try again!")
+                    time.sleep(2)
+                    clear_line()
+                    continue
                 else:
                     print("💥 Bad choice! The turbulence worsens, causing damage to the plane.")
                     return 2
@@ -134,6 +143,11 @@ def random_events(level):
                 if choice == 2:
                     print("✅ Good choice! You assess the situation and stabilize the flight.")
                     return 1
+                elif choice > 3:
+                    print("Invalid input, try again!")
+                    time.sleep(2)
+                    clear_line()
+                    continue
                 else:
                     print("💥 Bad choice! Without understanding the issue, your plane loses control.")
                     return 2
@@ -151,6 +165,11 @@ def random_events(level):
                 if choice == 1:
                     print("✅ Correct! You successfully navigate around the storm.")
                     return 1
+                elif choice > 3:
+                    print("Invalid input, try again!")
+                    time.sleep(2)
+                    clear_line()
+                    continue
                 else:
                     print("💥 Wrong choice! The plane is severely damaged in the storm.")
                     return 2
@@ -163,6 +182,11 @@ def random_events(level):
                 if choice == 2:
                     print("✅ Good decision! You gain altitude and smooth out the flight.")
                     return 1
+                elif choice > 3:
+                    print("Invalid input, try again!")
+                    time.sleep(2)
+                    clear_line()
+                    continue
                 else:
                     print("💥 Wrong choice! The plane is severely damaged in the storm.")
                     return 2
@@ -175,6 +199,11 @@ def random_events(level):
                 if choice == 2:
                     print("✅ Correct! You check backup systems and regain control.")
                     return 1
+                elif choice > 3:
+                    print("Invalid input, try again!")
+                    time.sleep(2)
+                    clear_line()
+                    continue
                 else:
                     print("💥 Bad choice! The malfunction leads to a crash.")
                     return 2
@@ -192,6 +221,11 @@ def random_events(level):
                 if choice == 1:
                     print("✅ Smart move! You steer clear of the ash cloud.")
                     return 1
+                elif choice > 3:
+                    print("Invalid input, try again!")
+                    time.sleep(2)
+                    clear_line()
+                    continue
                 else:
                     print("💥 Incorrect choice! The engines are damaged by the ash. Restarting level!")
                     continue  # Restart the level if crash happens
@@ -204,6 +238,11 @@ def random_events(level):
                 if choice == 3:
                     print("✅ Wise choice! You successfully land the plane.")
                     return 1
+                elif choice > 3:
+                    print("Invalid input, try again!")
+                    time.sleep(2)
+                    clear_line()
+                    continue
                 else:
                     print("💥 Bad choice! You lose control on landing. Restarting level!")
                     continue  # Restart the level if crash happens
@@ -216,6 +255,11 @@ def random_events(level):
                 if choice == 3:
                     print("✅ Good call! You use alternative gauges and maintain control.")
                     return 1
+                elif choice > 3:
+                    print("Invalid input, try again!")
+                    time.sleep(2)
+                    clear_line()
+                    continue
                 else:
                     print("💥 Bad choice! You are flying dangerously without information. Restarting level!")
                     continue  # Restart the level if crash happens
@@ -233,6 +277,11 @@ def random_events(level):
                 if choice == 2:
                     print("✅ Correct! You successfully de-ice the wings and regain control.")
                     return 1
+                elif choice > 3:
+                    print("Invalid input, try again!")
+                    time.sleep(2)
+                    clear_line()
+                    continue
                 else:
                     print("💥 Bad choice! Climbing worsens the icing condition. Restarting level!")
                     continue  # Restart the level if crash happens
@@ -245,6 +294,11 @@ def random_events(level):
                 if choice == 2:
                     print("✅ Wise choice! You avoid a dangerous collision.")
                     return 1
+                elif choice > 3:
+                    print("Invalid input, try again!")
+                    time.sleep(2)
+                    clear_line()
+                    continue
                 else:
                     print("💥 Bad choice! You hit the birds and suffer damage. Restarting level!")
                     continue  # Restart the level if crash happens
@@ -257,6 +311,11 @@ def random_events(level):
                 if choice == 1:
                     print("✅ Good choice! You locate an airport and land safely.")
                     return 1
+                elif choice > 3:
+                    print("Invalid input, try again!")
+                    time.sleep(2)
+                    clear_line()
+                    continue
                 else:
                     print("💥 Bad choice! The plane runs out of fuel. Restarting level!")
                     continue  # Restart the level if crash happens
@@ -274,6 +333,11 @@ def random_events(level):
                 if choice == 3:
                     print("✅ Smart choice! You regain communication using backups.")
                     return 1
+                elif choice > 3:
+                    print("Invalid input, try again!")
+                    time.sleep(2)
+                    clear_line()
+                    continue
                 else:
                     print("💥 Bad choice! You lose valuable time and crash. Restarting level!")
                     continue  # Restart the level if crash happens
@@ -286,6 +350,11 @@ def random_events(level):
                 if choice == 1:
                     print("✅ Wise move! You avoid losing altitude.")
                     return 1
+                elif choice > 3:
+                    print("Invalid input, try again!")
+                    time.sleep(2)
+                    clear_line()
+                    continue
                 else:
                     print("💥 Bad choice! You lose control of the aircraft. Restarting level!")
                     continue  # Restart the level if crash happens
@@ -298,6 +367,11 @@ def random_events(level):
                 if choice == 1:
                     print("✅ Good choice! You identify and resolve the issue.")
                     return 1
+                elif choice > 3:
+                    print("Invalid input, try again!")
+                    time.sleep(2)
+                    clear_line()
+                    continue
                 else:
                     print("💥 Bad choice! Ignoring it leads to a crash. Restarting level!")
                     continue  # Restart the level if crash happens
@@ -314,6 +388,11 @@ def random_events(level):
                 if choice == 2:
                     print("✅ Wise choice! You safely avoid a collision.")
                     return 1
+                elif choice > 3:
+                    print("Invalid input, try again!")
+                    time.sleep(2)
+                    clear_line()
+                    continue
                 else:
                     print("💥 Bad choice! Communication failure results in danger. Restarting level!")
                     continue  # Restart the level if crash happens
@@ -326,6 +405,11 @@ def random_events(level):
                 if choice == 1:
                     print("✅ Correct! You avoid the storm entirely.")
                     return 1
+                elif choice > 3:
+                    print("Invalid input, try again!")
+                    time.sleep(2)
+                    clear_line()
+                    continue
                 else:
                     print("💥 Bad choice! You end up in the worst part of the storm. Restarting level!")
                     continue  # Restart the level if crash happens
@@ -338,6 +422,11 @@ def random_events(level):
                 if choice == 3:
                     print("✅ Smart choice! You contain the fire and maintain control.")
                     return 1
+                elif choice > 3:
+                    print("Invalid input, try again!")
+                    time.sleep(2)
+                    clear_line()
+                    continue
                 else:
                     print("💥 Bad choice! The plane loses power. Restarting level!")
                     continue  # Restart the level if crash happens
@@ -354,6 +443,11 @@ def random_events(level):
                 if choice == 3:
                     print("✅ Good decision! You develop a plan with your co-pilot.")
                     return 1
+                elif choice > 3:
+                    print("Invalid input, try again!")
+                    time.sleep(2)
+                    clear_line()
+                    continue
                 else:
                     print("💥 Bad choice! A controlled descent fails. Restarting level!")
                     continue  # Restart the level if crash happens
@@ -366,6 +460,11 @@ def random_events(level):
                 if choice == 1:
                     print("✅ Smart choice! You counteract the downdraft effectively.")
                     return 1
+                elif choice > 3:
+                    print("Invalid input, try again!")
+                    time.sleep(2)
+                    clear_line()
+                    continue
                 else:
                     print("💥 Bad choice! Lowering flaps causes instability. Restarting level!")
                     continue  # Restart the level if crash happens
@@ -378,6 +477,11 @@ def random_events(level):
                 if choice == 3:
                     print("✅ Correct! You establish contact and get directions.")
                     return 1
+                elif choice > 3:
+                    print("Invalid input, try again!")
+                    time.sleep(2)
+                    clear_line()
+                    continue
                 else:
                     print("💥 Bad choice! Time wasted leads to a crash. Restarting level!")
                     continue  # Restart the level if crash happens
@@ -396,7 +500,7 @@ def get_location(name):
     result = cursor.fetchone()
     cursor.close()
 
-    return result if result else ("Unknown", "Unknown")
+    return result
 
 def get_airport_list(country_code):
     sql ="""select airport.id, airport.name from airport
@@ -410,7 +514,19 @@ def get_airport_list(country_code):
 
     return result
 
-  
+def check_airport_availability(destination):
+    sql = """select airport.id from airport where airport.id = %s;"""
+    cursor = yhteys.cursor()
+    cursor.execute(sql, (destination,))
+    result = cursor.fetchall()
+    cursor.close()
+    if len(result) == 0:
+        return False
+    else:
+        return True
+
+
+
 def change_location(destination, name):
     sql = """  update game 
                 join airport on game.location = airport.gps_code 
@@ -439,20 +555,20 @@ def get_fuel(name):
     return result
 
 
-# Function to randomly ask the user to press arrow keys in a fast sequence
-def press_arrow_keys_fast(num: float):
-    try:
-        if os.geteuid() != 0:
-            print("Error: You must be root to use the keyboard library on Linux.")
-            return 2  # Indicate failure due to lack of permissions
+import random
+import time
+import os
+import keyboard  # Assuming you have keyboard module for key press detection
 
-        arrow_keys = ['up', 'down', 'left', 'right']
-    except AttributeError:
-        print("Error: Unable to check user privileges. This feature may not work as expected.")
-        return 2
+def press_arrow_keys_fast(num: float):
+    arrow_keys = ['up', 'down', 'left', 'right']
     
-    # Generate a random sequence of 5 arrow keys
-    sequence = random.choices(arrow_keys, k=5)
+    # Generate a random sequence of 5 arrow keys, ensuring no consecutive keys are the same
+    sequence = []
+    while len(sequence) < 5:
+        next_key = random.choice(arrow_keys)
+        if not sequence or next_key != sequence[-1]:  # Ensure no consecutive keys
+            sequence.append(next_key)
     
     # Show the countdown before starting
     for i in range(3, 0, -1):
@@ -461,13 +577,13 @@ def press_arrow_keys_fast(num: float):
     
     print("Go!\n")
     
-    # Show the sequence to the user one key at a time
-    
-    start_time = time.time()  # Start tracking time
+    # Start tracking time
+    start_time = time.time()
 
+    # Show the sequence to the user one key at a time
     for key in sequence:
         print(f"Press: {key} (You have {num} seconds!)")
-        # Wait for the user to press the correct key within 2 seconds
+        # Wait for the user to press the correct key within the time limit
         key_start_time = time.time()  # Start time for the current key
         while time.time() - key_start_time < num:
             if keyboard.is_pressed(key):
@@ -488,11 +604,11 @@ def press_arrow_keys_fast(num: float):
     # Calculate total time taken
     total_time = end_time - start_time
 
-
     os.system('cls' if os.name == 'nt' else 'clear')
     print('\033[F\033[K', end='')
     print(f"✅ Great! You pressed all keys in {total_time:.2f} seconds.")
-    return 1  # Player successfully pressed all keys
+    
+    return 1
 
 def airport_distance(name, destination):
     current_location = get_location(name)

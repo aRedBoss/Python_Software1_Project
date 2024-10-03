@@ -13,4 +13,4 @@ while True:
     print(f"You have {points} points")
     print("You win!")
     time.sleep(3)
-    break
+    break 
