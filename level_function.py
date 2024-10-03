@@ -6,6 +6,7 @@ import os
 
 
 def level_one(name):
+    function.add_player(name)
     while True:
         current_location = function.get_location(name)
         if current_location is None:

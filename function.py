@@ -663,6 +663,17 @@ def change_fuel(name, destination):
 
     return result
 
+def display_scoreboard():
+    sql = "SELECT screen_name, points FROM game ORDER BY points DESC"
+    cursor = yhteys.cursor()
+    cursor.execute(sql)
+    results = cursor.fetchall()
+    cursor.close()
+
+    print("\nScoreboard:")
+    for row in results:
+        print(f"Player: {row[0]}, Points: {row[1]}")
+
 
 def airplane_shape():
     airplane_shape = r"""
