@@ -9,9 +9,9 @@ import keyboard
 yhteys = mysql.connector.connect(
     host='localhost',
     port=3306,
-    database='flight_simulator',
-    user='mostafa',
-    password='123123',
+    database='flight_game',
+    user='omar',
+    password='Amoury123',
     charset='utf8mb4',
     collation='utf8mb4_general_ci',
     autocommit=True
@@ -60,6 +60,8 @@ def get_points(name):
     result = cursor.fetchone()
 
     return result[0]
+
+
 
 
 def change_point_win(name):
@@ -374,12 +376,24 @@ def random_events(level):
 
 
 def get_location(name):
-    sql = """  select country.name, airport.name 
+    sql = """  select country.name, airport.name, airport.id 
                 from country 
                 inner join airport 
                 on country.iso_country = airport.iso_country 
                 inner join game 
                 on game.location = airport.gps_code 
+                where game.screen_name = %s"""
+    cursor = yhteys.cursor()
+    cursor.execute(sql, (name,))
+    result = cursor.fetchone()
+    cursor.close()
+
+    return result
+
+def get_airport_id(name):
+    sql = """   select airport.id from airport 
+                inner join country on airport.iso_country = country.iso_country 
+                inner join game on game.location = airport.gps_code 
                 where game.screen_name = %s"""
     cursor = yhteys.cursor()
     cursor.execute(sql, (name,))
@@ -397,6 +411,18 @@ def get_airport_list(country_code):
     cursor = yhteys.cursor()
     cursor.execute(sql, (country_code,))
     result = cursor.fetchall()
+    cursor.close()
+
+    return result
+
+def country_code(name):
+    sql = """   select country.iso_country from country 
+                inner join airport on airport.iso_country = country.iso_country 
+                inner join game on game.location = airport.gps_code 
+                where game.screen_name = %s"""
+    cursor = yhteys.cursor()
+    cursor.execute(sql, (name,))
+    result = cursor.fetchone()
     cursor.close()
 
     return result
@@ -544,17 +570,37 @@ def change_fuel(name, destination):
 
     return result
 
-
 def display_scoreboard():
-    sql = "SELECT screen_name, points FROM game ORDER BY points DESC"
+    sql = "SELECT screen_name, high_score FROM game ORDER BY high_score DESC"
     cursor = yhteys.cursor()
     cursor.execute(sql)
-    results = cursor.fetchall()
+    result = cursor.fetchall()
     cursor.close()
 
     print("\nScoreboard:")
-    for row in results:
-        print(f"Player: {row[0]}, Points: {row[1]}")
+    for row in result:
+        print(f"Player: {row[0]}, high score: {row[1]}")
+
+def get_high_score(name):
+    sql = "SELECT high_score FROM game where screen_name = %s"
+    cursor = yhteys.cursor()
+    cursor.execute(sql, (name,))
+    result = cursor.fetchone()
+    cursor.close()
+
+    return result
+
+
+def change_high_score(points, name):
+    sql = """update game set high_score = %s where screen_name = %s;"""
+    high_score = get_high_score(name)[0]
+    if points > high_score:
+        cursor = yhteys.cursor()
+        cursor.execute(sql, (points, name))
+        yhteys.commit()
+        cursor.close()
+        return 1
+    return 0
 
 
 def airplane_shape():

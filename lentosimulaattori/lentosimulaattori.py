@@ -5,7 +5,6 @@ import time
 name = input("Hei, mikä sinun nimesi on? ")
 funktiot.default_settings(name)
 
-high_score = 1
 
 while True:
     taso_funktio.level_one(name)
@@ -16,14 +15,11 @@ while True:
     points = funktiot.get_points(name)
     print(f"Onneksi olkoon! Pääsit pelin läpi {points} pisteellä!")
     time.sleep(1)
-    if points > high_score[0]:
-        high_score[0] = points
-        print(f"Uusi ennätys: {high_score} pistettä!")
-        time.sleep(2)
-    print (f"Piste ennätys: {high_score} pistettä.")
-    time.sleep(1)
+    funktiot.change_high_score(points, name)
+    funktiot.display_scoreboard()
     play_again = input("Haluatko pelata uudelleen? (y/n): ").lower()
     if play_again == "y":
+        funktiot.default_settings(name)
         continue
     elif play_again == "n":
         print("Ensi kertaan.")
