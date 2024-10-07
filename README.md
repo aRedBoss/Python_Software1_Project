@@ -63,4 +63,4 @@ Here are the key files that make up the game:
 Ainoat muutokset, jotka olemme tehneet tietokantaan:
 
 INSERT INTO game (points) VALUES (0);
-INSERT INTO game (points) VALUES (0);
+INSERT INTO game (high_score) VALUES (0);
