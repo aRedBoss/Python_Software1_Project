@@ -9,7 +9,7 @@ Welcome to the **Flight Simulator Game**! This is a console-based game where pla
 - [Game Phases](#game-phases)
 - [Game Rules](#game-rules)
 - [How to Play](#how-to-play)
-- [Functions Overview](#functions-overview)
+- [Database Setup](#database-setup)
 
 ## Features
 - **Player Registration**: Register with a unique screen name or log in to an existing one.
@@ -58,3 +58,9 @@ Here are the key files that make up the game:
 1. lentosimulaattori.py: The main file to run the game. This handles player interactions, including registration, selecting destinations, and calling functions from other files.
 2. funktiot.py: Contains core game logic and utility functions like managing locations and handling challenges.
 3. taso_funktiot.py: Handles level progression and random events. This file manages how the game becomes more difficult as the player advances.
+
+## Database Setup
+Ainoat muutokset, jotka olemme tehneet tietokantaan:
+
+INSERT INTO game (points) VALUES (0);
+INSERT INTO game (points) VALUES (0);
