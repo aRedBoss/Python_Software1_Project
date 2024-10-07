@@ -17,7 +17,7 @@ yhteys = mysql.connector.connect(
     autocommit=True
 )
 
-
+# Done by Omar
 def player_exists(name):
     sql = "select count(screen_name) from game where screen_name = %s"
     cursor = yhteys.cursor()
@@ -27,7 +27,7 @@ def player_exists(name):
 
     return result[0] > 0
 
-
+# Done by Omar
 def get_count_of_players():
     sql = "select count(id) from game;"
     cursor = yhteys.cursor()
@@ -37,7 +37,7 @@ def get_count_of_players():
 
     return result[0]
 
-
+# Done by Omar
 def add_player(name):
     if player_exists(name):
         print("Tervetuloa takaisin!")
@@ -52,7 +52,7 @@ def add_player(name):
         cursor.close()
     return
 
-
+# Done by Hussein
 def get_points(name):
     sql = "select points from game where screen_name = %s"
     cursor = yhteys.cursor()
@@ -63,7 +63,7 @@ def get_points(name):
 
 
 
-
+# Done by Hussein
 def change_point_win(name):
     sql = "update game set game.points = (game.points + 1) where screen_name = %s"
     cursor = yhteys.cursor()
@@ -73,7 +73,7 @@ def change_point_win(name):
 
     return "Olet ansainnut pisteen!"
 
-
+# Done by Hussein
 def change_point_lost(name):
     sql = "update game set game.points = (game.points - 1) where screen_name = %s"
     cursor = yhteys.cursor()
@@ -83,7 +83,7 @@ def change_point_lost(name):
 
     return "Olet hävinnyt pisteen!"
 
-
+# Done by Omar
 def default_settings(name):
     sql = "update game set game.points = 0, game.co2_consumed = 0, game.location = 'EFHK' where screen_name = %s"
     cursor = yhteys.cursor()
@@ -93,7 +93,7 @@ def default_settings(name):
 
     return "Players values set to default"
 
-
+# Done by Omar, Hussein, Mostafa, Cahit, nasiro
 def random_events(level):
     if level == 1:
 
@@ -374,7 +374,7 @@ def random_events(level):
                     print("💥 Huono valinta! Tämä voi pahentaa tilannetta ja johtaa entistä vakavampiin ongelmiin.")
                     continue
 
-
+# Done by Mostafa
 def get_location(name):
     sql = """  select country.name, airport.name, airport.id 
                 from country 
@@ -389,7 +389,7 @@ def get_location(name):
     cursor.close()
 
     return result
-
+# Done by Mostafa
 def get_airport_id(name):
     sql = """   select airport.id from airport 
                 inner join country on airport.iso_country = country.iso_country 
@@ -402,7 +402,7 @@ def get_airport_id(name):
 
     return result
 
-
+# Done by Mostafa
 def get_airport_list(country_code):
     sql = """select airport.id, airport.name from airport
             inner join country 
@@ -414,7 +414,7 @@ def get_airport_list(country_code):
     cursor.close()
 
     return result
-
+# Done by Nasiro
 def country_code(name):
     sql = """   select country.iso_country from country 
                 inner join airport on airport.iso_country = country.iso_country 
@@ -427,7 +427,7 @@ def country_code(name):
 
     return result
 
-
+# Done by Omar
 def check_airport_availability(destination, country_code):
     sql = """select airport.id from airport inner join country on airport.iso_country = country.iso_country where airport.id = %s and country.iso_country = %s;"""
     cursor = yhteys.cursor()
@@ -439,7 +439,7 @@ def check_airport_availability(destination, country_code):
     else:
         return True
 
-
+# Done by Mostafa
 def change_location(destination, name):
     sql = """  update game 
                 join airport on game.location = airport.gps_code 
@@ -454,7 +454,7 @@ def change_location(destination, name):
 
     return  # (f"Player {name}'s location has been updated to {destination}")
 
-
+# Done by Omar
 def get_fuel(name):
     sql = """ select co2_budget, co2_consumed
                 from game
@@ -466,7 +466,7 @@ def get_fuel(name):
     cursor.close()
 
     return result
-
+# Done by Omar, Mostafa
 def press_arrow_keys_fast(num: float):
     arrow_keys = ['up', 'down', 'left', 'right']
 
@@ -503,12 +503,10 @@ def press_arrow_keys_fast(num: float):
             time.sleep(3)
             os.system('cls' if os.name == 'nt' else 'clear')
             print('\033[F\033[K', end='')
-            return 2  # Player failed to press the key in time
+            return 2
 
-    # End tracking time
     end_time = time.time()
 
-    # Calculate total time taken
     total_time = end_time - start_time
 
     os.system('cls' if os.name == 'nt' else 'clear')
@@ -517,7 +515,7 @@ def press_arrow_keys_fast(num: float):
 
     return 1
 
-
+# Done by Omar
 def airport_distance(name, destination):
     current_location = get_location(name)
     airport1 = current_location[1]
@@ -542,17 +540,15 @@ def airport_distance(name, destination):
 
     cursor.close()
 
-    airport1_coords = (result1[0], result1[1])  # (latitude, longitude)
+    airport1_coords = (result1[0], result1[1])
     airport2_coords = (result2[0], result2[1])
 
-    # Calculate the distance using geopy
     distance = geodesic(airport1_coords, airport2_coords).kilometers
 
-    # print(f"Calculated distance from {airport1} to {airport2} is {distance:.2f} km.")
 
     return distance
 
-
+# Done by Omar
 def change_fuel(name, destination):
     distance = airport_distance(name, destination)
     fuel_consumed = (distance / 100) * 10
@@ -569,7 +565,7 @@ def change_fuel(name, destination):
     # print(result)
 
     return result
-
+# Done by Cahit
 def display_scoreboard():
     sql = "SELECT screen_name, high_score FROM game ORDER BY high_score DESC"
     cursor = yhteys.cursor()
@@ -581,6 +577,7 @@ def display_scoreboard():
     for row in result:
         print(f"Player: {row[0]}, high score: {row[1]}")
 
+# Done by Cahit
 def get_high_score(name):
     sql = "SELECT high_score FROM game where screen_name = %s"
     cursor = yhteys.cursor()
@@ -590,7 +587,7 @@ def get_high_score(name):
 
     return result
 
-
+# Done by Cahit
 def change_high_score(points, name):
     sql = """update game set high_score = %s where screen_name = %s;"""
     high_score = get_high_score(name)[0]
@@ -602,7 +599,7 @@ def change_high_score(points, name):
         return 1
     return 0
 
-
+# Done by Cahit
 def airplane_shape():
     airplane_shape = r"""
        __|__
@@ -610,7 +607,7 @@ def airplane_shape():
         """
     print(airplane_shape)
 
-
+# Done by Mostafa
 def clear_line():
     os.system('cls' if os.name == 'nt' else 'clear')
     print('\033[F\033[K', end='')

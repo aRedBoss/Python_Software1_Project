@@ -5,7 +5,7 @@ import time
 name = input("Hei, mikä sinun nimesi on? ")
 funktiot.default_settings(name)
 
-
+# Done by Omar, Mostafa
 while True:
     taso_funktio.level_one(name)
     taso_funktio.level_two(name)

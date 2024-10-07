@@ -3,7 +3,7 @@ import random
 import time
 import os
 
-
+# Done by Omar
 def level_one(name):
     funktiot.add_player(name)
     print (funktiot.get_high_score(name)[0])
@@ -96,7 +96,7 @@ def level_one(name):
             funktiot.default_settings(name)
             continue
 
-
+# Done by Mostafa
 def level_two(name):
     points = funktiot.get_points(name)
     while True:
@@ -179,7 +179,7 @@ def level_two(name):
             points
             continue
 
-
+# Done by Cahit
 def level_three(name):
     points = funktiot.get_points(name)
     while True:
@@ -262,7 +262,7 @@ def level_three(name):
             points
             continue
 
-
+# Done by Hussein
 def level_four(name):
     points = funktiot.get_points(name)
     while True:
@@ -345,7 +345,7 @@ def level_four(name):
             points
             continue
 
-
+# Done by Nasiro
 def level_five(name):
     points = funktiot.get_points(name)
     while True:
