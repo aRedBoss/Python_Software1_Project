@@ -414,7 +414,7 @@ def get_airport_list(country_code):
     cursor.close()
 
     return result
-# Done by Omar
+# Done by Nasiro
 def country_code(name):
     sql = """   select country.iso_country from country 
                 inner join airport on airport.iso_country = country.iso_country 
