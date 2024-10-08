@@ -345,7 +345,7 @@ def level_four(name):
             points
             continue
 
-# Done by Nasiro
+# Done by Omar
 def level_five(name):
     points = funktiot.get_points(name)
     while True:
