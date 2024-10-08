@@ -93,7 +93,7 @@ def default_settings(name):
 
     return "Players values set to default"
 
-# Done by Omar, Hussein, Mostafa, Cahit, nasiro
+# Done by Omar, Hussein, Mostafa, Cahit
 def random_events(level):
     if level == 1:
 
@@ -414,7 +414,7 @@ def get_airport_list(country_code):
     cursor.close()
 
     return result
-# Done by Nasiro
+# Done by Omar
 def country_code(name):
     sql = """   select country.iso_country from country 
                 inner join airport on airport.iso_country = country.iso_country 
