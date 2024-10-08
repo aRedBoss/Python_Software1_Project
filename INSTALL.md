@@ -24,4 +24,4 @@ To set up the Flight Game, follow these steps:
    ```
 
 4. **Run the Game**:
-   - Execute the `Flight_simulator.py` script to start the game.
+   - Execute the `lentosimulattori.py` script to start the game.
