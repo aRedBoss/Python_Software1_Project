@@ -5,14 +5,14 @@ To set up the Flight Game, follow these steps:
 ## Prerequisites
 
 - Python 3.x
-- MySQL Server
+- MariaDB Server
 
 ## Installation Steps
 
 1. **Clone the Repository**: Clone the project repository to your local machine.
 
 2. **Set Up the Database**:
-   - Ensure your MySQL server is running.
+   - Ensure your MariaDB server is running.
    - Create a database named `flight_game`.
    - Import the `flight_simulator.sql` file to set up the necessary tables.
 
